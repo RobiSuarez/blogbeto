@@ -5,12 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\CursoController;
- 
+use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/',HomeController::class);
-Route::get("cursos", [CursoController::class, "index"]);
-Route::get('cursos/create',[CursoController::class,"create"]);
-Route::get("cursos/{curso}",[CursoController::class,"show"]);
+
+route::controller(CursoController::class)->group(function(){ 
+    Route::get("cursos","index");
+    Route::get('cursos/create',"create");
+    Route::get("cursos/{curso}","show");
+});
 
 /* Route::get('cursos/{cursos}/{categoria?}', function ($curso,$categoria = null) {
     if($categoria)
@@ -21,4 +24,4 @@ Route::get("cursos/{curso}",[CursoController::class,"show"]);
     {
     return "Bienvenido al curso: $curso ";
     }
-}); */
+}); */ 
